@@ -28,9 +28,7 @@ public class RequestHandler {
         NettyMessage nettyMessage = new NettyMessage((byte)1,(byte)randomTask,testMsg.getBytes().length,testMsg);
 
         for(Channel channel : channelList){
-           if( channel.attr(messageHandler.taskType).get() == (byte)randomTask){
-               channel.writeAndFlush(nettyMessage);
-           }
+
         }
     }
 
