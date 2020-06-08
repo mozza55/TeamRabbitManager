@@ -1,4 +1,4 @@
-package com.rabbitmq.server.handler;
+package com.rabbitmq.server.channel.handler;
 
 import com.rabbitmq.server.dto.NettyMessage;
 import io.netty.buffer.ByteBuf;

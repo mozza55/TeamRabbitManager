@@ -1,14 +1,9 @@
 package com.rabbitmq.server.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
-@ToString
 public class NettyMessage {
 
     private byte messageType;

@@ -1,9 +1,9 @@
 package com.rabbitmq.server;
 
-import com.rabbitmq.server.handler.MessageDecoder;
-import com.rabbitmq.server.handler.MessageEncoder;
-import com.rabbitmq.server.handler.MessageHandler;
-import io.netty.channel.Channel;
+
+import com.rabbitmq.server.channel.handler.MessageDecoder;
+import com.rabbitmq.server.channel.handler.MessageEncoder;
+import com.rabbitmq.server.channel.handler.MessageHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -11,7 +11,6 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

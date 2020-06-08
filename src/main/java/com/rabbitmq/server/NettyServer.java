@@ -1,15 +1,10 @@
 package com.rabbitmq.server;
 
-import com.rabbitmq.server.handler.MessageDecoder;
-import com.rabbitmq.server.handler.MessageEncoder;
-import com.rabbitmq.server.handler.MessageHandler;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
-import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.AttributeKey;
@@ -18,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -34,13 +28,12 @@ public class NettyServer {
     private int bossCount;
     @Value("${worker.thread.count}")
     private int workerCount;
-    private final int MAX_FRAME_SIZE =1024;
 
     @Autowired private CustomInitializer customInitializer;
     @Autowired public AttributeKey<Integer> taskType;
     public void start() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(bossCount); //연결
-        EventLoopGroup workerGroup = new NioEventLoopGroup(4); //입출력  내부 설정에 의해 cpu 코어 수에 따라 설정
+        EventLoopGroup workerGroup = new NioEventLoopGroup(workerCount); //입출력
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class NettyConfiguration {
 
     @Bean
-    public ChannelGroup channelGroup(){
+    public ChannelGroup channelList(){
         return new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     }
     @Bean

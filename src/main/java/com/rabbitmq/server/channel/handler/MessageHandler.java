@@ -1,20 +1,13 @@
-package com.rabbitmq.server.handler;
+package com.rabbitmq.server.channel.handler;
 
 import com.rabbitmq.server.config.BeanUtils;
 import com.rabbitmq.server.dto.NettyMessage;
 import com.rabbitmq.server.service.RequestHandler;
-import com.rabbitmq.server.service.ResponseHandler;
 import io.netty.channel.*;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.util.AttributeKey;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
-import java.util.concurrent.SynchronousQueue;
 
 //@Component
 //@RequiredArgsConstructor
@@ -40,11 +33,8 @@ public class MessageHandler extends SimpleChannelInboundHandler<NettyMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, NettyMessage msg) throws Exception {
         logger.info("channel read:" +msg.toString());
-        //String response = msg.getBody();
-        //NettyMessage nettyMessage = new NettyMessage((byte)1, (byte)1,response.getBytes().length,response);
-        //ChannelFuture future = ctx.writeAndFlush(nettyMessage);
         requestHandler.request(msg);
-        //ctx.channel().
+
 
     }
 
