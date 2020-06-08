@@ -16,20 +16,16 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class RequestHandler {
 
-    private final MessageHandler messageHandler;
-    private final ChannelGroup channelList;
+    //private final MessageHandler messageHandler;
+    private final ChannelGroup channelGroup;
     Logger logger =  LoggerFactory.getLogger(this.getClass());
 
-    public void request(Message msg){
-        String testMsg = msg.toString();
-        Random random = new Random();
-        int randomTask=random.nextInt(2);
-        logger.info("msg (random task:"+(byte)randomTask+") : "+msg);
-        NettyMessage nettyMessage = new NettyMessage((byte)1,(byte)randomTask,testMsg.getBytes().length,testMsg);
+    public void request(NettyMessage msg) throws InterruptedException {
+        String response = msg.getBody();
+        logger.info("response : "+msg.getBody());
 
-        for(Channel channel : channelList){
-
-        }
+        NettyMessage nettyMessage = new NettyMessage((byte)1,(byte)1,response.getBytes().length,response);
+        channelGroup.writeAndFlush(nettyMessage);
     }
 
 

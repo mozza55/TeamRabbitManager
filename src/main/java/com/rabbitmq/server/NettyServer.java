@@ -40,7 +40,7 @@ public class NettyServer {
     @Autowired public AttributeKey<Integer> taskType;
     public void start() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(bossCount); //연결
-        EventLoopGroup workerGroup = new NioEventLoopGroup(); //입출력  내부 설정에 의해 cpu 코어 수에 따라 설정
+        EventLoopGroup workerGroup = new NioEventLoopGroup(4); //입출력  내부 설정에 의해 cpu 코어 수에 따라 설정
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)

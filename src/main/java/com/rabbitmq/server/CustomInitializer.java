@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class CustomInitializer extends ChannelInitializer<SocketChannel> {
 
     private final int MAX_FRAME_SIZE =2048;
-    private final MessageHandler messageHandler;
+    //private final MessageHandler messageHandler;
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -30,6 +30,6 @@ public class CustomInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new MessageDecoder());;
         pipeline.addLast(new MessageEncoder());
         //메세지 핸들러 추가
-        pipeline.addLast(messageHandler);
+        pipeline.addLast(new MessageHandler());
     }
 }
