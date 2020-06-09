@@ -16,18 +16,18 @@ public class MessageHandler extends SimpleChannelInboundHandler<NettyMessage> {
 
     Logger logger;
     public final  AttributeKey<Integer> taskType = AttributeKey.valueOf("taskType");
-    ChannelGroup channelGroup;
+    ChannelGroup channelList;
     RequestHandler requestHandler;
     public MessageHandler() {
         logger =  LoggerFactory.getLogger(this.getClass());
-        channelGroup =(ChannelGroup) BeanUtils.getBean("channelGroup");
+        channelList =(ChannelGroup) BeanUtils.getBean("channelList");
         requestHandler =(RequestHandler) BeanUtils.getBean("requestHandler");
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Integer port = ctx.channel().attr(taskType).get();
         logger.info("port"+port+"channel active");
-        channelGroup.add(ctx.channel());
+        channelList.add(ctx.channel());
     }
 
     @Override
