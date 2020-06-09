@@ -33,7 +33,7 @@ public class NettyServer {
     @Autowired public AttributeKey<Integer> taskType;
     public void start() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(bossCount); //연결
-        EventLoopGroup workerGroup = new NioEventLoopGroup(workerCount); //입출력
+        EventLoopGroup workerGroup = new NioEventLoopGroup(); //입출력
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)

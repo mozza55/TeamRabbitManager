@@ -26,14 +26,14 @@ public class MessageHandler extends SimpleChannelInboundHandler<NettyMessage> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Integer port = ctx.channel().attr(taskType).get();
-        logger.info("port"+port+"channel active");
+        logger.info("port "+port+" channel active");
         channelList.add(ctx.channel());
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, NettyMessage msg) throws Exception {
         logger.info("channel read:" +msg.toString());
-        requestHandler.request(msg);
+        requestHandler.request(ctx,msg);
 
 
     }
